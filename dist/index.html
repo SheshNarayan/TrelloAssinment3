@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>TrelloHomePage</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--1. Page heading and nav bar starts-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <h1 class="display-5" style="text-align: center">Trello</h1>
+    </nav>
+    <!--1. Page heading and nav bar Ends-->
+
+    <!--2. Create Board -->
+    <section class="createboard float-left">
+        <button class="btn btn-info btn-sm" type="button" role="button" data-toggle="modal" data-target="#createboardmodal">
+                Create a board
+        </button> 
+        <!-- <i class="em em-heavy_plus_sign"></i>&nbsp; -->
+        <!-- </section> -->
+        <section class="modal" id="createboardmodal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Create Board</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                            <div class="form-group">
+                                    <label for="createboard">Board Name</label>
+                                    <input  name="createboard" id="createboard" type="text" class="form-control">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="createmodelsavebtn" type="button" class="btn btn-success" placeholder="Board name must not be empty">Save</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <!-- Creating List Modal -->
+    <section class="modal" id="createlistmodal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Create a List</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                            <div class="form-group">
+                                    <label for="createlist">List Name</label>
+                                    <input  name="createlist" id="createlist" type="text" class="form-control" placeholder="List name must not be empty">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="createlistsavebtn" type="button" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- Creating Card Model -->
+    <section class="modal" id="createcardmodal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Create a Card</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                            <div class="form-group">
+                                    <label for="inputcardname">Card Name</label>
+                                    <input  name="inputcardname" id="inputcardname" type="text" class="form-control" placeholder="Card name must not be empty">
+                            </div>
+                            <div class="form-group">
+                                    <label for="inputcarddesc">Card Description</label>
+                                    <input name="inputcarddesc" id="inputcarddesc" type="text" class="form-control">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="createcardbtn" type="button" class="btn btn-success">Create Card</button>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- jQuery JS -->
+   <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+   <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+ 
+<script type="text/javascript" src="bundle.js"></script></body>
+</html>

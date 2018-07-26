@@ -1,0 +1,91 @@
+.navcss {
+  flex:1
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.card-custom {
+        max-width: 128px;
+    }
+body{
+  background-color: aliceblue;
+}
+
+#showModalBtn{
+  background-color: #a3af6ef1;
+  color: #e6f0e2;
+  border: 0;
+  width: 11%;
+}
+
+#headnav{
+  background: #56aae2!important;
+}
+
+.card{
+  background-color: antiquewhite;
+  box-shadow: 0 4px 8px 0 #ce636333, 0 6px 20px 0 #8b272730;
+}
+.form-rounded {
+  border-radius: 1rem;
+}
+.modal-content{
+  background-image: url('../img/modalback.jpg');
+  background-size: 100%;
+}
+
+#boardname{
+  /* background-color: #eea07cbe; */
+  font-weight: bold;
+}
+
+.close{
+  color: white!important;
+}
+a.card-title{
+  font-size: 20px;
+}
+.hidden {
+  display: none;
+}
+.popover-title {
+  text-align: center;
+}
+
+.custom-popover li {
+  border: none!important;
+  text-align: center;
+}
+
+.custom-popover li:nth-child(2) {
+  border-top: 1px solid #ccc!important;
+}
+
+.custom-popover li:last-child {
+  border-top: 1px solid #cccccc!important;
+}
+
+h5{
+  text-align: center;
+  color:whitesmoke!important;
+}
+
+@media only screen and (min-width: 700px) {
+  .navbar-brand {
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
+  }
+  #firstsection{
+    min-height: 258.594px;
+    height: auto;
+  }
+  #thirdsection{
+    min-height: 258.594px;
+    height: auto;
+  }
+}
