@@ -1,8 +1,9 @@
 const path = require('path');
+var webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-   
+   mode:"development",
     // entry:"./main.js",
     entry:"./js/index.js",
     output: {
@@ -31,6 +32,12 @@ module.exports = {
     },
 
     plugins:[
+        new webpack.ProvidePlugin({
+            "$": "jquery",
+            "jQuery": "jquery",
+            "window.jQuery": "jquery",
+            'global.jQuery': 'jquery'
+        }),
         new htmlWebpackPlugin({template: './index.html'})
     ],
     watch: true

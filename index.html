@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   <title>My Trello</title>
+  <title>My Trello</title>
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css">
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -12,126 +12,76 @@
 </head>
 
 <body>
-<!-- Navigation -->
-<nav id="headnav" class="navbar navbar-dark bg-dark navbar-toggleable-md navbar-expand-md ">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+  <!-- Navigation -->
+  <nav id="headnav" class="navbar navbar-dark bg-dark navbar-toggleable-md navbar-expand-md ">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+      aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#"><h5 id="title">My Trello</h5></a>
+    <a class="navbar-brand" href="#">
+      <h5 id="title">My Trello</h5>
+    </a>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href="#" active>Home </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link dropdown" data-placement="bottom" id="boards" href="#">Boards... <span class="sr-only">(current)</span></a>
-        </li>
-     </ul> 
-  </div>
-</nav>
+        <!-- <li class="nav-item">
+          <a class="nav-link dropdown" data-placement="bottom" id="boards" href="#"
+           onclick="displayBoards(event);">Boards... <span class="sr-only">(current)</span></a>
+        </li> -->
+      </ul>
+      <div>
+        <button type="button" id="showModalBtn" class="btn col-sm-12" data-toggle="modal" data-target="#boardModal">
+          <i class="em em-heavy_plus_sign"></i>Create a Board</button>
+      </div>
+    </div>
+  </nav>
 
-<!-- Page Content -->
-<div>
-    <button type="button" id="showModalBtn" class="btn btn-light col-sm-12 card-text" 
-      data-toggle="modal" data-target="#boardModal">
-      <i class="em em-heavy_plus_sign"></i>Create a Board</button>
-  </div>
-  <!-- loaded popover content -->
+  <!-- Page Content -->
+  <!-- Board navigation List -->
   <div class="hidden boardsLists">
-    <ul class="list-group custom-popover" id="popoeverid" onclick="displayBoards(event);"></ul>
+    <ul class="nav flex-column" id="popoeverid">
+    </ul>
   </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="boardModal" tabindex="-1" role="dialog" aria-labelledby="boardModalLabel" aria-hidden="true">
+  <div class= "hidden boardheading">
+      <h3 id="boardheadingid"></h3>
+  </div>
+
+  <div class="container d-flex flex-wrap" id="boardsHolder">
+    <div class="hidden jumbotron row vertical-center-transparent" id="createListid">
+      <section class="col-sm-12" style="display:none;">
+        <input type="text" id="createList" class="form-control col-sm-12" placeholder="List name?">
+        <button class="btn col-md-4 btn btn-primary" id="addListBtn">+AddList</button>
+        <button class="btn btn-primary col-sm-3" id="hideBtn">Close</button>
+      </section>
+      <button type="button" id="showBtn" class="btn col-sm-12 custombtnclass">+List</button>
+    </div>
+  </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="boardModal" tabindex="-1" role="dialog" aria-labelledby="boardModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title" id="boardModalLabel">Create New Board</h4>
           </div>
           <div class="modal-body">
-              <form>
-                <div class="form-group">
-                  <input type="text" class="form-control" id="boardname" 
-                    placeholder="New Board Name?" name="boardname"></input>
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" id="saveModaBtnl" class="btn btn-primary">Save</button>
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                </div>
-              </form>
-          </div> 
+            <form>
+              <div class="form-group">
+                <input type="text" class="form-control" id="boardname" placeholder="New Board Name?" name="boardname"></input>
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="saveModaBtn" class="btn btn-primary" data-dismiss="modal">Save</button>
+                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button> -->
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  <!-- Bootstrap core JavaScript -->
-  <script src="js/jquery.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <!-- <script type="text/javascript" src="js/homepage.js"></script> -->
-  
-  <script type="text/javascript">
-    var boardname=document.getElementById('boardname');
-    var modalBtn=document.getElementById('saveModaBtnl');
-      boardname.addEventListener("keydown", function(event) {
-        if(this.value.trim()!=""){
-          modalBtn.className='btn btn-primary';
-        }
-      });
-      $('#boardModal').on('hidden.bs.modal', function () {
-        boardname.value="";
-        modalBtn.className='btn btn-default';
-      });
-      boardname.addEventListener("keyup", function(event) {
-        if(this.value.trim()==""){
-          this.value="";
-          modalBtn.className='btn btn-default';
-        }
-      });
-      modalBtn.addEventListener("click", function(event) {
-        event.preventDefault();
-        var val=boardname.value;
-        if(val.trim()!=""){
-          boardname.value="";
-          if (localStorage.getItem('status') === null) {
-            localStorage.setItem('status',val);
-          }else{
-            if((localStorage.getItem('status').split('#')).indexOf(val) > -1){
-
-            }else {
-              localStorage.setItem('status',localStorage.getItem('status')+"#"+val);
-            }
-          }
-          window.location.href = 'homepage.html?boardname='+encodeURIComponent(val);
-        }
-      });
-
-      var popoverpoint = document.getElementById('popoeverid');
-      if (localStorage.getItem('status') === null) {
-        console.log("Sorry, No board to dispaly!");
-      }else{
-        var boardnames=localStorage.getItem('status').split('#');
-        for(var i=0;i<boardnames.length;i++){
-          var poplistelemt=document.createElement('li');
-          poplistelemt.className= 'list-group-item listselclass';
-          var span = document.createElement('span');
-          span.appendChild(document.createTextNode(boardnames[i]));
-          poplistelemt.appendChild(span);
-          popoverpoint.appendChild(poplistelemt);
-        }
-      }
-      function displayBoards(event) {
-            var target = event.target || event.srcElement;
-            window.location.href = 'homepage.html?boardname='+encodeURIComponent(event.target.textContent || event.target.innerText);
-      }
-      var head=document.getElementById('boards');
-      head.setAttribute("data-trigger", "focus");
-
-      $(head).popover({
-        html : true,
-        content: function() {
-          return $(".boardsLists").html();
-        }
-      }); 
-  </script>
 </body>
+
 </html>

@@ -1,3 +1,90 @@
+#showModalBtn{
+  background-color: #a3af6ef1;
+  color: #e6f0e2;
+  border: 0;
+}
+
+#headnav{
+  background: #56aae2!important;
+}
+
+#popoeverid{
+  list-style-type: none;
+}
+
+a{
+  text-decoration:none;
+}
+
+.boardheading{
+  text-align: center!important;
+  background-color: cadetblue!important;
+}
+#boardheadingid{
+  color:#723a3a !important;
+}
+
+
+#showBtn {
+  background-color: #9c6b6b;
+  color: #ffffff;
+  border: 0;
+  margin-top: 25% !important;
+}
+
+#createList {
+  /* background-color: #9c6b6b;
+  color: #ffffff;
+  border: 0; */
+  margin-top: 25% !important;
+}
+
+
+.row{
+  margin-top: 0!important;
+}
+
+.vertical-center-transparent {
+  background-color:#998a8a;
+  margin: auto;
+  border-radius: 6px;
+  max-width: 368px;
+  min-height: 201px;
+  width: 100%;
+  height: auto;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+
+}
+
+.vertical-center{
+  background-color: #998a8a;
+  margin: auto;
+  border-radius: 6px;
+  min-height: 201px;
+  width: 100%;
+  max-width: 368px;
+  height: auto;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+}
+
+.listdiv{
+  background-color: #998a8a;
+  border: 1px solid gray;
+  border-radius: 6px;
+  margin: auto;
+  max-width: 368px;
+  min-height: 201px;
+  width: 100%;
+  height: auto;
+  opacity: 0.9;
+  display: inline-block;
+}
+/* Comment The Below */
+
 .navcss {
   flex:1
 }
@@ -15,16 +102,7 @@ body{
   background-color: aliceblue;
 }
 
-#showModalBtn{
-  background-color: #a3af6ef1;
-  color: #e6f0e2;
-  border: 0;
-  width: 11%;
-}
 
-#headnav{
-  background: #56aae2!important;
-}
 
 .card{
   background-color: antiquewhite;
@@ -74,7 +152,7 @@ h5{
   color:whitesmoke!important;
 }
 
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 500px) {
   .navbar-brand {
     transform: translateX(-50%);
     left: 50%;
