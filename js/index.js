@@ -28,6 +28,7 @@ window.onload = function() {
 document.getElementById('saveModaBtn').onclick = function () {
 	// boards = getObjFromLocaleStorage(applicationStatus);
 	createNewBoard(document.getElementById('boardname').value);
+	location.reload();
 }
 
 function createNewBoard(boardName) {
@@ -38,7 +39,6 @@ function createNewBoard(boardName) {
 		name: boardName,
 		lists: []
 	}
-	
 	persistObjInLocaleStorage(applicationStatus, boards);
 	displayBoards(boards);
 }
@@ -75,17 +75,17 @@ function createNewListOnBoard(event) {
 	$("#createListid").show();
 	currBoardName = event.target.text;
 	selectedBoardId = this.parentElement.getAttribute('board-id');
-	console.log(currBoardName + " " + selectedBoardId);
-	// var listsOnBoad = boards[selectedBoardId].lists;
-	// if(listsOnBoad){
-	// 	for(let i = 0; i< listsOnBoad.length; i++){
-	// 		console.log(listsOnBoad[i]);
-	// 		displayListOnSelectedBoard(listsOnBoad[i]);
-	// 	}
-	// }
-	// console.log("currBoardName: "+currBoardName + ", selectedBoardId: " + selectedBoardId+", listsOnBoad: "+listsOnBoad[0].name);
+	console.log("currBoardName: "+currBoardName + ", selectedBoardId: " + selectedBoardId);
+	///// Dispaying list
+	var listsOnBoad = boards[selectedBoardId].lists;
+	if(listsOnBoad){
+		for(let i = 0; i< listsOnBoad.length; i++){
+			console.log(listsOnBoad[i]);
+			displayListOnSelectedBoard(listsOnBoad[i]);
+		}
+		//console.log("listsOnBoad: "+listsOnBoad[0].name);
+	}
 	
-	var newListName = "";
 	document.getElementById('boardheadingid').innerText = currBoardName;
 	var showBtn = document.getElementById('showBtn');
 	var addListBtn = document.getElementById("addListBtn").addEventListener('click', listFunction);
@@ -135,7 +135,8 @@ var getSiblings = function (elem) {
 	return siblings;
 };
 
-export const listFunction = function () {
+// export const listFunction = function () {
+function listFunction() {	
 	//alert('clicked listFunction!!');
 	console.log('clicked listFunction!!');
 	if (createList.value.trim() != "") {
@@ -299,8 +300,6 @@ function cardFunction(inputContainer, msgContainer, inputContainerid, msgContain
 }
 
 function createCard(card, list, cardid, listid) {
-	// alert("createCard CardId: "+cardid);
-	// alert("createCard LsitID: "+listid);
 	var cardval = card.value;
 	var entry = document.createElement('li');
 	entry.className = 'row listItem';
@@ -340,143 +339,140 @@ function getValueFromLocaleStorage(key) {
 
 // ========================================================================
 
-// function  displayListOnSelectedBoard(newListName){
-// 	uniuqeId++;
-// 	var section = document.createElement("section");
-// 	section.id = "list" + uniuqeId;
-// 	section.name = "list" + uniuqeId;
-// 	section.setAttribute('list-id', '' + selectedBoardId + lists.length);
-// 	section.className = 'listdiv row form-group';
+function  displayListOnSelectedBoard(newListName){
+	uniuqeId++;
+	var section = document.createElement("section");
+	section.id = "list" + uniuqeId;
+	section.name = "list" + uniuqeId;
+	section.setAttribute('list-id', '' + selectedBoardId + lists.length);
+	section.className = 'listdiv row form-group';
 
-// 	var headerDiv = document.createElement("div");
-// 	headerDiv.id = "headerDiv" + uniuqeId;
-// 	headerDiv.name = "headerDiv" + uniuqeId;
-// 	headerDiv.className = 'col-sm-12 d-flex form-group';
+	var headerDiv = document.createElement("div");
+	headerDiv.id = "headerDiv" + uniuqeId;
+	headerDiv.name = "headerDiv" + uniuqeId;
+	headerDiv.className = 'col-sm-12 d-flex form-group';
 
-// 	var h5 = document.createElement("h5");
-// 	h5.textContent = newListName.name;
-// 	h5.className = 'flex-grow-1';
-// 	h5.style = 'text-align:left;color:white;';
-// 	h5.setAttribute("contenteditable", "true");
+	var h5 = document.createElement("h5");
+	h5.textContent = newListName.name;
+	h5.className = 'flex-grow-1';
+	h5.style = 'text-align:left;color:white;';
+	h5.setAttribute("contenteditable", "true");
 
-// 	var closeListButton = document.createElement("button");
-// 	closeListButton.textContent = 'X';
-// 	closeListButton.tabindex = "0";
-// 	closeListButton.className = "btn btn-light removeCardBtn";
-// 	closeListButton.style = 'font-size: 1.25rem;';
+	var closeListButton = document.createElement("button");
+	closeListButton.textContent = 'X';
+	closeListButton.tabindex = "0";
+	closeListButton.className = "btn btn-light removeCardBtn";
+	closeListButton.style = 'font-size: 1.25rem;';
 
-// 	closeListButton.onclick = function () {
-// 		document.getElementById("boardsHolder").removeChild(section);
-// 		persistObjInLocaleStorage(applicationStatus, boards);
-// 	};
+	closeListButton.onclick = function () {
+		document.getElementById("boardsHolder").removeChild(section);
+		persistObjInLocaleStorage(applicationStatus, boards);
+	};
 
-// 	headerDiv.appendChild(h5);
-// 	headerDiv.appendChild(closeListButton);
-// 	var msgContainer = document.createElement('ul');
-// 	msgContainer.id = "listcontect" + uniuqeId;
-// 	msgContainer.name = "listcontect" + uniuqeId;
-// 	msgContainer.className = 'connected list col-sm-12';
-// 	var tempChild = document.createElement('li');
-// 	msgContainer.appendChild(tempChild);
-// 	var br = document.createElement('br');
+	headerDiv.appendChild(h5);
+	headerDiv.appendChild(closeListButton);
+	var msgContainer = document.createElement('ul');
+	msgContainer.id = "listcontect" + uniuqeId;
+	msgContainer.name = "listcontect" + uniuqeId;
+	msgContainer.className = 'connected list col-sm-12';
+	var tempChild = document.createElement('li');
+	msgContainer.appendChild(tempChild);
+	var br = document.createElement('br');
 
-// 	var div = document.createElement("div");
-// 	div.id = "div" + uniuqeId;
-// 	div.name = "div" + uniuqeId;
-// 	div.className = 'col-sm-12 form-group';
+	var div = document.createElement("div");
+	div.id = "div" + uniuqeId;
+	div.name = "div" + uniuqeId;
+	div.className = 'col-sm-12 form-group';
 
-// 	var inputContainer = document.createElement("input");
-// 	inputContainer.type = "text";
-// 	inputContainer.name = "listinput" + uniuqeId;
-// 	inputContainer.id = "listinput" + uniuqeId;
-// 	inputContainer.className = 'col-md-12 form-control inputContainerClass';
-// 	inputContainer.placeholder = 'Card Name?';
-// 	// inputContainer.addEventListener("keyup", function (event) {
-// 	// 	event.preventDefault();
-// 	// 	if (event.keyCode === 13) {
-// 	// 		if (inputContainer.value.trim() != "") {
-// 	// 			//cardFunction(inputContainer, msgContainer, inputContainer.id, msgContainer.id);
-// 	// 			displayCardOnSelectedList(newListName);
-// 	// 			persistObjInLocaleStorage(applicationStatus, boards);
-// 	// 		}
-// 	// 	}
-// 	// });
-// 	var addCardBtn = document.createElement('button');
-// 	addCardBtn.textContent = 'Save Card';
-// 	addCardBtn.className = 'col-md-4 btn btn-primary savecardBtn';
-// 	// addCardBtn.onclick = function () {
-// 	// 	if (inputContainer.value.trim() != "") {
-// 	// 		//cardFunction(inputContainer, msgContainer, inputContainer.id, msgContainer.id);
-// 	// 		displayCardOnSelectedList(newListName);
-// 	// 		persistObjInLocaleStorage(applicationStatus, boards);
-// 	// 	}
-// 	// };
-// 	var closeCardBtn = document.createElement('button');
-// 	closeCardBtn.textContent = 'Close';
-// 	closeCardBtn.className = 'btn btn-primary col-sm-3';
-// 	closeCardBtn.onclick = function () {
-// 		var sib = getSiblings(this);
-// 		sib[0].value = "";
-// 		var sib1 = getSiblings(this.parentNode);
-// 		sib1[3].style.display = 'block';
-// 		this.parentNode.style.display = 'none';
-// 		persistObjInLocaleStorage(applicationStatus, boards);
-// 	};
-// 	div.appendChild(inputContainer);
-// 	div.appendChild(addCardBtn);
-// 	div.appendChild(closeCardBtn);
-// 	div.style = 'display:none';
-// 	var divBtn = document.createElement("div");
-// 	divBtn.id = "divBtn" + uniuqeId;
-// 	divBtn.name = "divBtn" + uniuqeId;
-// 	divBtn.className = 'col-sm-12 form-group';
-// 	var addCardDefaultBtn = document.createElement('button');
-// 	addCardDefaultBtn.textContent = "+Add Card"
-// 	addCardDefaultBtn.className = 'col-sm-12 btn form-group custombtnclass';
-// 	addCardDefaultBtn.addEventListener("click", function (event) {
-// 		var sib1 = getSiblings(this.parentNode);
-// 		sib1[3].style.display = 'block';
-// 		this.parentNode.style.display = 'none';
-// 		persistObjInLocaleStorage(applicationStatus, boards);
-// 	});
-// 	divBtn.appendChild(addCardDefaultBtn);
-// 	section.appendChild(headerDiv);
-// 	msgContainer.removeChild(tempChild);
-// 	section.appendChild(msgContainer);
-// 	section.appendChild(br);
-// 	section.appendChild(divBtn);
-// 	section.appendChild(div);
-// 	boardsHolder.appendChild(section);
-// 	//cardFunction(inputContainer, msgContainer, inputContainer.id, msgContainer.id)
-// 	displayCardOnSelectedList(newListName, uniuqeId);
-// 	persistObjInLocaleStorage(applicationStatus, boards);
-// }
+	var inputContainer = document.createElement("input");
+	inputContainer.type = "text";
+	inputContainer.name = "listinput" + uniuqeId;
+	inputContainer.id = "listinput" + uniuqeId;
+	inputContainer.className = 'col-md-12 form-control inputContainerClass';
+	inputContainer.placeholder = 'Card Name?';
+	inputContainer.addEventListener("keyup", function (event) {
+	event.preventDefault();
+	if (event.keyCode === 13) {
+			if (inputContainer.value.trim() != "") {
+				cardFunction(inputContainer, msgContainer, inputContainer.id, msgContainer.id);
+				persistObjInLocaleStorage(applicationStatus, boards);
+			}
+		}
+	});
+	var addCardBtn = document.createElement('button');
+	addCardBtn.textContent = 'Save Card';
+	addCardBtn.className = 'col-md-4 btn btn-primary savecardBtn';
+	addCardBtn.onclick = function () {
+		if (inputContainer.value.trim() != "") {
+			cardFunction(inputContainer, msgContainer, inputContainer.id, msgContainer.id);
+			persistObjInLocaleStorage(applicationStatus, boards);
+		}
+	};
+	var closeCardBtn = document.createElement('button');
+	closeCardBtn.textContent = 'Close';
+	closeCardBtn.className = 'btn btn-primary col-sm-3';
+	closeCardBtn.onclick = function () {
+		var sib = getSiblings(this);
+		sib[0].value = "";
+		var sib1 = getSiblings(this.parentNode);
+		sib1[3].style.display = 'block';
+		this.parentNode.style.display = 'none';
+		persistObjInLocaleStorage(applicationStatus, boards);
+	};
+	div.appendChild(inputContainer);
+	div.appendChild(addCardBtn);
+	div.appendChild(closeCardBtn);
+	div.style = 'display:none';
+	var divBtn = document.createElement("div");
+	divBtn.id = "divBtn" + uniuqeId;
+	divBtn.name = "divBtn" + uniuqeId;
+	divBtn.className = 'col-sm-12 form-group';
+	var addCardDefaultBtn = document.createElement('button');
+	addCardDefaultBtn.textContent = "+Add Card"
+	addCardDefaultBtn.className = 'col-sm-12 btn form-group custombtnclass';
+	addCardDefaultBtn.addEventListener("click", function (event) {
+		var sib1 = getSiblings(this.parentNode);
+		sib1[3].style.display = 'block';
+		this.parentNode.style.display = 'none';
+		persistObjInLocaleStorage(applicationStatus, boards);
+	});
+	divBtn.appendChild(addCardDefaultBtn);
+	section.appendChild(headerDiv);
+	msgContainer.removeChild(tempChild);
+	section.appendChild(msgContainer);
+	section.appendChild(br);
+	section.appendChild(divBtn);
+	section.appendChild(div);
+	boardsHolder.appendChild(section);
+	//cardFunction(inputContainer, msgContainer, inputContainer.id, msgContainer.id)
+	displayCardOnSelectedList(newListName, uniuqeId);
+	persistObjInLocaleStorage(applicationStatus, boards);
+}
 
-// //// displayCardOnSelectedList
-// function displayCardOnSelectedList(newListName, id){
-// 	alert("displayCardOnSelectedList...")
-// 	var cardList = newListName.cards;
-// 	var list = document.getElementById('listcontect'+id);
-// 	for(let i=0;i<cardList.length; i++){
-// 		var cardval = cardList[i].name;
-// 		var entry = document.createElement('li');
-// 		entry.className = 'row listItem';
-// 		var span = document.createElement('span');
-// 		span.className = 'display col-sm-9 form-control';
-// 		span.appendChild(document.createTextNode(cardval));
-// 		var inputCard = document.createElement("input");
-// 		inputCard.type = "text";
-// 		inputCard.value=
-// 		inputCard.className = 'edit col-sm-9 form-control';
-// 		inputCard.style = 'display:none';
-// 		entry.appendChild(span);
-// 		entry.appendChild(inputCard);
-// 		list.appendChild(entry);
-// 	}
-// 	// const cardLength = boards[selectedBoardId].lists[(boards[selectedBoardId].lists.length) - 1].cards.length;
-// 	// boards[selectedBoardId].lists[(boards[selectedBoardId].lists.length) - 1].cards[cardLength] = {
-// 	// 	name: cardval
-// 	// }
-// 	console.log(boards);
-// 	persistObjInLocaleStorage(applicationStatus, boards);
-// }
+//// displayCardOnSelectedList
+function displayCardOnSelectedList(newListName, id){
+	var cardList = newListName.cards;
+	var list = document.getElementById('listcontect'+id);
+	for(let i=0;i<cardList.length; i++){
+		var cardval = cardList[i].name;
+		var entry = document.createElement('li');
+		entry.className = 'row listItem';
+		var span = document.createElement('span');
+		span.className = 'display col-sm-9 form-control';
+		span.appendChild(document.createTextNode(cardval));
+		var inputCard = document.createElement("input");
+		inputCard.type = "text";
+		//inputCard.value=
+		inputCard.className = 'edit col-sm-9 form-control';
+		inputCard.style = 'display:none';
+		entry.appendChild(span);
+		entry.appendChild(inputCard);
+		list.appendChild(entry);
+	}
+	// const cardLength = boards[selectedBoardId].lists[(boards[selectedBoardId].lists.length) - 1].cards.length;
+	// boards[selectedBoardId].lists[(boards[selectedBoardId].lists.length) - 1].cards[cardLength] = {
+	// 	name: cardval
+	// }
+	console.log(boards);
+	persistObjInLocaleStorage(applicationStatus, boards);
+}
